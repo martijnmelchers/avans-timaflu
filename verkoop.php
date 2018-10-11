@@ -12,7 +12,7 @@
 	include ("parts/header.php");
 ?>
 <form style="width: 80%; margin: 0 auto;">
-	<div class="form-group" style="display: flex; flex-direction: row; ">
+	<div class="form-group timaflu-form-adresses">
 		<label for="klantnaam">Klantnaam:</label>
 		<input type="text" class="form-control" id="klantnaam" placeholder="Klantnaam">
 		
