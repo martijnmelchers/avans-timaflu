@@ -2,15 +2,3 @@ body, html {
     height: 100%;
     overflow-x: hidden;
 }
-
-.timaflu-form-adresses {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-}
-
-.timaflu-form-adresses > input {
-	width: 25%;
-	margin: 0 10px;
-}
