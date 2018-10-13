@@ -79,6 +79,7 @@
 
             </span>
 
+
             <span id="goedkoopPrijs">
 
             </span>
@@ -99,8 +100,14 @@
         $("#productDropdownButton").text($(el.target).text());
 
         const productId = $(el.target).data("product_id"); 
+        
         $("#goedkoopFabrikant #placeHolder").remove();
-        $("#goedkoopNaam").text(productFabrikanten[productId].naam);
+        
+        $("#goedkoopNaam").html(
+            "De goedkoopste fabrikant is: <br>" + 
+            "<b>" + productFabrikanten[productId].naam + ":</b>"
+        );
+
         $("#goedkoopPrijs").text("€" + productFabrikanten[productId].prijs);
 
     });
