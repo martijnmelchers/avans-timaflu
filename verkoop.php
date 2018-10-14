@@ -12,17 +12,11 @@
 	include("parts/header.php");
 ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-<form style="width: 80%; margin: 0 auto;" id="main-form">
+<form style="width: 80%; margin: 0 auto;" id="main-form" action="order-confirmed.php">
 	<h1 class="title">Verkoopformulier</h1>
 	
 	<p>Selecteer klant of voer nieuwe klantgegevens in</p>
 	<select id="select">
-		<option>BaapMedia: 1</option>
-		<option>Vodka inc.: 2</option>
-		<option>Nossocorp: 3</option>
-		<option>Snackbar: 4</option>
-		<option>Circus TimaFloemp: 5</option>
-		<option>Dorrestruik internet services: 4</option>
 	</select>
 	<div class="form-group row" style="margin: 30px 0">
 		<div class="col">
@@ -31,14 +25,14 @@
 		</div>
 		<div class="col">
 			<label for="klantnaam">Klantnummer:</label>
-			<input type="text" class="form-control" id="klantnaam" placeholder="Klantnummer">
+			<input type="text" class="form-control" id="klantnummer" placeholder="Klantnummer">
 		</div>
 		<div class="col">
 			<label for="klantnaam">Adres:</label>
-			<input type="text" class="form-control" id="klantnaam" placeholder="Adres">
+			<input type="text" class="form-control" id="adres" placeholder="Adres">
 		</div>
 	</div>
-	<div class="orderregel-container">
+	<div id="orderregel-container">
 		<div class="form-group row orderregel" style="display: flex; align-items: center; margin: 30px 0">
 			<div class="col">
 				<label for="select2">Medicijn:</label>
@@ -63,9 +57,64 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-	$("#select").select2();
+	const data = [
+		{
+			id: 0,
+			text: "BaapMedia",
+			klantnaam: "BaapMedia",
+			klantnummer: 1,
+			adres: "Promenade 55 3962HB Wijk bij Duurstede"
+		},
+		{
+			id: 1,
+			text: "Vodka inc",
+			klantnaam: "Vodka inc",
+			klantnummer: 2,
+			adres: "Kruisnbessengaard 66 2927HS Almelo"
+		},
+		{
+			id: 2,
+			text: "Nossocorp",
+			klantnaam: "Nossocorp",
+			klantnummer: 3,
+			adres: "Apothekerslaan 5 6969HQ Amsterdam"
+		},
+		{
+			id: 3,
+			text: "Snackbar",
+			klantnaam: "Snackbar",
+			klantnummer: 4,
+			adres: "Stegeman 88 9336HQ Zaandam"
+		},
+		{
+			id: 4,
+			text: "Circus TimaFloemp",
+			klantnaam: "Circus TimaFloemp",
+			klantnummer: 5,
+			adres: "Poollaan 78 9866HS Venlo"
+		},
+		{
+			id: 5,
+			text: "Dorrestruik internet services",
+			klantnaam: "Dorrestruik internet services",
+			klantnummer: 6,
+			adres: "Avanslaan 87 627KL Den Bosch"
+		},
+	];
+	const form = $("#select");
+	
+	form.select2({
+		data: data
+	});
 
+	form.on('select2:select', function (e) {
+		let data = e.params.data;
+		$("#klantnaam").val(data.klantnaam);
+		$("#klantnummer").val(data.klantnummer);
+		$("#adres").val(data.adres);
+	});
+	
 	function addRow() {
-		$(".orderregel").clone().appendTo(".orderregel-container");
+		$(".orderregel").clone().appendTo("#orderregel-container");
 	}
 </script>
