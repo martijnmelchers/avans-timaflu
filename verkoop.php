@@ -45,11 +45,12 @@
 				</select>
 			</div>
 			<div class="col">
-				<label for="klantnaam">Aantal:</label>
-				<input type="text" class="form-control" id="klantnaam" placeholder="Aantal">
+				<label for="aantal">Aantal:</label>
+				<input type="text" class="form-control aantal" id="aantal" placeholder="Aantal">
 			</div>
 		</div>
 	</div>
+	<p>Totaalprijs: &euro;<span id="totaal"></span></p>
 	<div class="btn btn-secondary" onclick="addRow()">Voeg orderregel toe</div>
 	<button type="submit" class="btn btn-primary">Sla bestelling op</button>
 </form>
@@ -112,6 +113,10 @@
 		$("#klantnaam").val(data.klantnaam);
 		$("#klantnummer").val(data.klantnummer);
 		$("#adres").val(data.adres);
+	});
+	
+	$(".aantal").on("focusout", function () {
+		$("#totaal").html(Math.floor(Math.random()*(500-5+1)+5));
 	});
 	
 	function addRow() {
