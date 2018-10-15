@@ -51,6 +51,7 @@
 		</div>
 	</div>
 	<p>Totaalprijs: &euro;<span id="totaal"></span></p>
+	<div class="btn btn-secondary" onclick="calcTotal()">Haal totaalprijs op</div>
 	<div class="btn btn-secondary" onclick="addRow()">Voeg orderregel toe</div>
 	<button type="submit" class="btn btn-primary">Sla bestelling op</button>
 </form>
@@ -121,5 +122,9 @@
 	
 	function addRow() {
 		$(".orderregel").clone().appendTo("#orderregel-container");
+	}
+	
+	function calcTotal() {
+		$("#totaal").html(Math.floor(Math.random()*(500-5+1)+5));
 	}
 </script>
