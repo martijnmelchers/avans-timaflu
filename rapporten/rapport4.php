@@ -9,7 +9,7 @@
 	 * NOTES:
 	 *-----------------------------------
 	 */
-	require "../parts/footer.php";
+	require "../parts/header.php";
 ?>
 
 <div class="container text-center">
