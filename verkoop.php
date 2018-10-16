@@ -33,7 +33,7 @@
 		</div>
 	</div>
 	<div id="orderregel-container">
-		<div class="form-group row orderregel" style="display: flex; align-items: center; margin: 30px 0">
+		<div class="form-group row default" style="display: flex; align-items: center; margin: 30px 0">
 			<div class="col">
 				<label for="select2">Medicijn:</label>
 				<select class="form-control">
@@ -59,7 +59,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-	const data = [
+	const customerData = [
 		{
 			id: 0,
 			text: "BaapMedia",
@@ -103,10 +103,53 @@
 			adres: "Avanslaan 87 627KL Den Bosch"
 		},
 	];
+	/*const medicijnData = [
+		{
+			id: 0,
+			text: "Altijdop tubes",
+			naam: "Altijdop tubes",
+			vooraad: 0,
+			prijs: 16
+		},
+		{
+			id: 1,
+			text: "Geen medicijn 0mg",
+			naam: "Geen medicijn 0mg",
+			vooraad: 2,
+			prijs: 8
+		},
+		{
+			id: 2,
+			text: "Voltaren emugel 300mg",
+			naam: "Voltaren emugel 300mg",
+			vooraad: 4,
+			prijs: 15
+		},
+		{
+			id: 3,
+			text: "Paracetamol 500mg",
+			naam: "Paracetamol 500mg",
+			vooraad: 10,
+			prijs: 13
+		},
+		{
+			id: 4,
+			text: "Paracetamol 500mg",
+			naam: "Xanax 6mg",
+			vooraad: 100,
+			prijs: 20
+		},
+	];*/
+
 	const form = $("#select");
-	
+	const form2 = $("#select2");
+	let elementcounter = 0;
+
 	form.select2({
-		data: data
+		data: customerData
+	});
+	form2.select2({
+		data: medicijnData
 	});
 
 	form.on('select2:select', function (e) {
@@ -115,16 +158,17 @@
 		$("#klantnummer").val(data.klantnummer);
 		$("#adres").val(data.adres);
 	});
-	
+
 	$(".aantal").on("focusout", function () {
-		$("#totaal").html(Math.floor(Math.random()*(500-5+1)+5));
+		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
 	});
-	
+
 	function addRow() {
-		$(".orderregel").clone().appendTo("#orderregel-container");
+		const el = $(".default").clone().removeClass("default").addClass(`orderregel${elementcounter}`).appendTo("#orderregel-container");
+		elementcounter++;
 	}
-	
+
 	function calcTotal() {
-		$("#totaal").html(Math.floor(Math.random()*(500-5+1)+5));
+		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
 	}
 </script>
