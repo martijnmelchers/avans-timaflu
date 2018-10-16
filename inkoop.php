@@ -104,6 +104,7 @@
                         <th scope="col">Prijs per stuk</th>
                         <th scope="col">Aantal</th>
                         <th scope="col">Totaalprijs</th>
+                        <th scope="col">Verwijderen</th>
                     </tr>
                 </thead>
                 <tbody id="huidigeBestelling">
@@ -145,7 +146,7 @@
         huidigeData = {
             bestelCode: productId,
             fabrikantNaam: productFabrikanten[productId].naam,
-            aantal: 0,
+            aantal: $("#productAantal").val(),
             prijs: productFabrikanten[productId].prijs,
         };
 
@@ -181,7 +182,7 @@
             $("#productAantal").val("");
             return;
         }
-
+        console.log(huidigeBestelling);
         huidigeBestelling.push(huidigeData);
         $("#huidigeBestelling").html("");
         for (const key in huidigeBestelling) {
@@ -189,18 +190,32 @@
                 const inkoopregel = huidigeBestelling[key];
                 const totaalprijs = inkoopregel.prijs * inkoopregel.aantal;
                 $("#huidigeBestelling").append(`
-                    <tr>
+                    <tr data-bestelCode="${inkoopregel.bestelCode}">
                         <th scope="row">${inkoopregel.bestelCode}</th>
                         <td>${inkoopregel.fabrikantNaam}</td>
                         <td>${inkoopregel.prijs}</td>
                         <td>${inkoopregel.aantal}</td>
                         <td>${totaalprijs}</td>
+                        <td class="removeRow"><b>X</b></td>
                     </tr>
                 `);
             }
         }
     });
 
+    $(document).on('click', ".removeRow" , function() {
+        const bestelCode = $(this).parent().data("bestelcode");
+          for (const key in huidigeBestelling) {
+            if (huidigeBestelling.hasOwnProperty(key)) {
+                if(huidigeBestelling[key].bestelCode == bestelCode){
+                    delete huidigeBestelling[key];
+                    break;  
+                }
+            }
+          }
+
+          $(this).parent().remove();
+    });
 
     $("#bestelProducten").click(() => {
         if(Object.keys(huidigeBestelling).length > 0){
