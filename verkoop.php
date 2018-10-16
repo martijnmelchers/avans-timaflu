@@ -50,8 +50,12 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<p>Alle producten beschikbaar: <span id="beschikbaar"></span></p>
+	<p>Prijs zonder korting: &euro;<span id="prijs"></span></p>
+	<p>Korting: <span id="korting"></span>&percnt;</p>
 	<p>Totaalprijs: &euro;<span id="totaal"></span></p>
-	<div class="btn btn-secondary" onclick="calcTotal()">Haal totaalprijs op</div>
+	<div class="btn btn-secondary" onclick="calcTotal(); calcKorting();">Haal totaalprijs op</div>
 	<div class="btn btn-secondary" onclick="addRow()">Voeg orderregel toe</div>
 	<button type="submit" class="btn btn-primary">Sla bestelling op</button>
 </form>
@@ -65,81 +69,50 @@
 			text: "BaapMedia",
 			klantnaam: "BaapMedia",
 			klantnummer: 1,
-			adres: "Promenade 55 3962HB Wijk bij Duurstede"
+			adres: "Promenade 55 3962HB Wijk bij Duurstede",
+			korting: 5,
 		},
 		{
 			id: 1,
 			text: "Vodka inc",
 			klantnaam: "Vodka inc",
 			klantnummer: 2,
-			adres: "Kruisnbessengaard 66 2927HS Almelo"
+			adres: "Kruisnbessengaard 66 2927HS Almelo",
+			korting: 5,
 		},
 		{
 			id: 2,
 			text: "Nossocorp",
 			klantnaam: "Nossocorp",
 			klantnummer: 3,
-			adres: "Apothekerslaan 5 6969HQ Amsterdam"
+			adres: "Apothekerslaan 5 6969HQ Amsterdam",
+			korting: 5,
 		},
 		{
 			id: 3,
 			text: "Snackbar",
 			klantnaam: "Snackbar",
 			klantnummer: 4,
-			adres: "Stegeman 88 9336HQ Zaandam"
+			adres: "Stegeman 88 9336HQ Zaandam",
+			korting: 5,
 		},
 		{
 			id: 4,
 			text: "Circus TimaFloemp",
 			klantnaam: "Circus TimaFloemp",
 			klantnummer: 5,
-			adres: "Poollaan 78 9866HS Venlo"
+			adres: "Poollaan 78 9866HS Venlo",
+			korting: 5,
 		},
 		{
 			id: 5,
 			text: "Dorrestruik internet services",
 			klantnaam: "Dorrestruik internet services",
 			klantnummer: 6,
-			adres: "Avanslaan 87 627KL Den Bosch"
+			adres: "Avanslaan 87 627KL Den Bosch",
+			korting: 5,
 		},
 	];
-	/*const medicijnData = [
-		{
-			id: 0,
-			text: "Altijdop tubes",
-			naam: "Altijdop tubes",
-			vooraad: 0,
-			prijs: 16
-		},
-		{
-			id: 1,
-			text: "Geen medicijn 0mg",
-			naam: "Geen medicijn 0mg",
-			vooraad: 2,
-			prijs: 8
-		},
-		{
-			id: 2,
-			text: "Voltaren emugel 300mg",
-			naam: "Voltaren emugel 300mg",
-			vooraad: 4,
-			prijs: 15
-		},
-		{
-			id: 3,
-			text: "Paracetamol 500mg",
-			naam: "Paracetamol 500mg",
-			vooraad: 10,
-			prijs: 13
-		},
-		{
-			id: 4,
-			text: "Paracetamol 500mg",
-			naam: "Xanax 6mg",
-			vooraad: 100,
-			prijs: 20
-		},
-	];*/
 
 	const form = $("#select");
 	const form2 = $("#select2");
@@ -148,19 +121,19 @@
 	form.select2({
 		data: customerData
 	});
-	form2.select2({
-		data: medicijnData
-	});
 
 	form.on('select2:select', function (e) {
 		let data = e.params.data;
 		$("#klantnaam").val(data.klantnaam);
 		$("#klantnummer").val(data.klantnummer);
 		$("#adres").val(data.adres);
+		$("#korting").html(data.korting);
 	});
 
 	$(".aantal").on("focusout", function () {
+		const options = ["JA", "NEE"];
 		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
+		$("#beschikbaar").html(options[Math.floor(Math.random() * 2)]);
 	});
 
 	function addRow() {
@@ -169,6 +142,10 @@
 	}
 
 	function calcTotal() {
-		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
+		$("#prijs").html(Math.floor(Math.random() * (500 - 200 + 1) + 200));
+	}
+
+	function calcKorting() {
+		$("#totaal").html(Math.floor(Math.random() * (200 - 5 + 1) + 5));
 	}
 </script>
