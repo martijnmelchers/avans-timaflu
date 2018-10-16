@@ -72,16 +72,21 @@
         </div>
 
         <div class="col-md-6" id="goedkoopFabrikant">
-            <h3>Goedkoopste fabrikant</h3>
+            <h3>Leverancierprijzen: </h3>
+            <br>
+            <h4>Goedkoopste: </h4>
             <p id="placeHolder">Selecteer een product om de goedkoopste fabrikant te zien.</p>
 
             <span id="goedkoopNaam">
 
             </span>
-
-
             <span id="goedkoopPrijs">
 
+            </span>
+            <br>
+            <br>
+            <h4>Andere prijzen: </h4>
+            <span id="anderePrijzen">
             </span>
         </div>
     </div>
@@ -119,9 +124,9 @@
     $("#productDropdown .dropdown-menu a").click((el) => {
 
         let productFabrikanten = {
-            77564: {naam: "Nossocorp",prijs: 10},
-            6674: {naam: "Paracetamolpaleis", prijs: 20},
-            8347: {naam: "aliexpress", prijs: 23},
+            77564: {naam: "Nossocorp",prijs: 10, andereFabrikanten: [{naam: "Paracetamolpaleis", prijs: 14},{naam: "aliexpress", prijs: 16}]},
+            6674: {naam: "Paracetamolpaleis", prijs: 20, andereFabrikanten: [{naam: "Nossocorp", prijs: 22}]},
+            8347: {naam: "aliexpress", prijs: 23, andereFabrikanten: [{naam: "Paracetamolpaleis", prijs: 30}]},
         };
 
         $("#productDropdownButton").text($(el.target).text());
@@ -143,6 +148,16 @@
             aantal: 0,
             prijs: productFabrikanten[productId].prijs,
         };
+
+        $("#anderePrijzen").html("");
+        for (const key in productFabrikanten[productId].andereFabrikanten) {
+            if (productFabrikanten[productId].andereFabrikanten.hasOwnProperty(key)) {
+                const fabrikant = productFabrikanten[productId].andereFabrikanten[key];
+                $("#anderePrijzen").append(`
+                    <b>${fabrikant.naam}: </b> € ${fabrikant.prijs} <br>
+                `);
+            }
+        }
     });
 
 
