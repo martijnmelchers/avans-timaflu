@@ -63,11 +63,11 @@
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Aantal</label>
-                <input type="number" class="form-control" placeholder="voer een productaantal in">
+                <input id="productAantal" type="number" class="form-control" placeholder="voer een productaantal in">
             </div> 
 
             <div class="form-group">
-                <button class="btn btn-danger">Meld bestelling</button>
+                <button class="btn btn-success" id="voegToeAanBestelling">Voeg toe aan bestelling</button>
             </div>
         </div>
 
@@ -85,10 +85,37 @@
             </span>
         </div>
     </div>
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <h3>Huidige bestelling</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">bestelCode</th>
+                        <th scope="col">Fabrikant</th>
+                        <th scope="col">Prijs per stuk</th>
+                        <th scope="col">Aantal</th>
+                        <th scope="col">Totaalprijs</th>
+                    </tr>
+                </thead>
+                <tbody id="huidigeBestelling">
+                </tbody>
+            </table>
+
+            <div class="form-group">
+                <button class="btn btn-danger" id="bestelProducten">Meld Bestelde producten</button>
+            </div>
+        </div>
+    </div>
 </form>
 </div>
 
 <script>
+    let hudigeData = {};
+    let huidigeBestelling = [];
     $("#productDropdown .dropdown-menu a").click((el) => {
 
         let productFabrikanten = {
@@ -109,7 +136,48 @@
         );
 
         $("#goedkoopPrijs").text("€" + productFabrikanten[productId].prijs);
+        
+        huidigeData = {
+            bestelCode: productId,
+            fabrikantNaam: productFabrikanten[productId].naam,
+            aantal: 0,
+            prijs: productFabrikanten[productId].prijs,
+        };
+    });
 
+
+    $("#productAantal").keyup(() => {
+        huidigeData.aantal = $("#productAantal").val();
+    });
+
+    $("#voegToeAanBestelling").click(() => {
+        huidigeBestelling.push(huidigeData);
+        $("#huidigeBestelling").html("");
+        for (const key in huidigeBestelling) {
+            if (huidigeBestelling.hasOwnProperty(key)) {
+                const inkoopregel = huidigeBestelling[key];
+                const totaalprijs = inkoopregel.prijs * inkoopregel.aantal;
+                $("#huidigeBestelling").append(`
+                    <tr>
+                        <th scope="row">${inkoopregel.bestelCode}</th>
+                        <td>${inkoopregel.fabrikantNaam}</td>
+                        <td>${inkoopregel.prijs}</td>
+                        <td>${inkoopregel.aantal}</td>
+                        <td>${totaalprijs}</td>
+                    </tr>
+                `);
+            }
+        }
+    });
+
+
+    $("#bestelProducten").click(() => {
+        if(Object.keys(huidigeBestelling).length > 0){
+            alert("Producten zijn gemeld als besteld (niet echt)");
+        }
+        else {
+            alert("Je hebt geen producten geselecteerd om een bestelling te maken!");
+        }
     });
 </script>
 
