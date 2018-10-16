@@ -14,7 +14,7 @@
 
 <div class="container text-center">
 	<h1>Inkooptotalen leveranciers</h1>
-	<img src="">
+	<img src="https://i.imgur.com/lK7iIY9.png">
 </div>
 
 <?php require "../parts/footer.php"; ?>
