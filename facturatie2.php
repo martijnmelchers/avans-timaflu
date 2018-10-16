@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Facturatie</h1>
         <br/>
-        <h3>Bedrijven die nalatig zijn met het betalen van een factuur</h3>
+        <h3>Onbetaalde facturen na 2 weken</h3>
         <br/>
         <table class="table">
             <thead>
