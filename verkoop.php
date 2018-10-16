@@ -131,7 +131,7 @@
 	});
 
 	$(".aantal").on("focusout", function () {
-		const options = ["JA", "NEE"]
+		const options = ["JA", "NEE"];
 		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
 		$("#beschikbaar").html(options[Math.floor(Math.random() * 2)]);
 	});
