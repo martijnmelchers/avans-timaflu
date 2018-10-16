@@ -14,7 +14,7 @@
 
 <div class="container text-center">
 	<h1>Overzicht klanten en kortinspercentages</h1>
-	<img src="">
+	<img src="https://i.imgur.com/J73WeZT.png">
 </div>
 
 <?php require "../parts/footer.php"; ?>
