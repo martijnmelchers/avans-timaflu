@@ -114,7 +114,7 @@
 </div>
 
 <script>
-    let hudigeData = {};
+    let huidigeData = {};
     let huidigeBestelling = [];
     $("#productDropdown .dropdown-menu a").click((el) => {
 
@@ -147,10 +147,26 @@
 
 
     $("#productAantal").keyup(() => {
-        huidigeData.aantal = $("#productAantal").val();
+        let value = $("#productAantal").val();
+        huidigeData.aantal = value;
     });
 
+
+    function validateNum(num){
+        if(num  <= 0){
+            return false;
+        }
+        return true;
+    }
+
     $("#voegToeAanBestelling").click(() => {
+     
+        if(!validateNum($("#productAantal").val())){
+            alert("Voer een geldig aantal in boven de de 0");
+            $("#productAantal").val("");
+            return;
+        }
+
         huidigeBestelling.push(huidigeData);
         $("#huidigeBestelling").html("");
         for (const key in huidigeBestelling) {
