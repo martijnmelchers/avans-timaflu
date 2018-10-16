@@ -50,6 +50,8 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<p>Alle producten beschikbaar: <span id="beschikbaar"></span></p>
 	<p>Prijs zonder korting: &euro;<span id="prijs"></span></p>
 	<p>Korting: <span id="korting"></span>&percnt;</p>
 	<p>Totaalprijs: &euro;<span id="totaal"></span></p>
@@ -129,7 +131,9 @@
 	});
 
 	$(".aantal").on("focusout", function () {
+		const options = ["JA", "NEE"]
 		$("#totaal").html(Math.floor(Math.random() * (500 - 5 + 1) + 5));
+		$("#beschikbaar").html(options[Math.floor(Math.random() * 2)]);
 	});
 
 	function addRow() {
@@ -140,7 +144,7 @@
 	function calcTotal() {
 		$("#prijs").html(Math.floor(Math.random() * (500 - 200 + 1) + 200));
 	}
-	
+
 	function calcKorting() {
 		$("#totaal").html(Math.floor(Math.random() * (200 - 5 + 1) + 5));
 	}
