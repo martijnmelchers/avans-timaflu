@@ -32,7 +32,7 @@
 			<input type="text" class="form-control" id="adres" placeholder="Adres">
 		</div>
 	</div>
-	<div id="orderregel-container">
+	<div id="orderregel-container" class="orderregel-container">
 		<div class="form-group row default" style="display: flex; align-items: center; margin: 30px 0">
 			<div class="col">
 				<label for="select2">Medicijn:</label>
@@ -57,6 +57,7 @@
 	<p>Totaalprijs: &euro;<span id="totaal"></span></p>
 	<div class="btn btn-secondary" onclick="calcTotal(); calcKorting();">Haal totaalprijs op</div>
 	<div class="btn btn-secondary" onclick="addRow()">Voeg orderregel toe</div>
+	<div class="btn btn-danger" onclick="removeRow()">Verwijder laaste orderregel</div>
 	<button type="submit" class="btn btn-primary">Sla bestelling op</button>
 </form>
 
@@ -139,6 +140,11 @@
 	function addRow() {
 		const el = $(".default").clone().removeClass("default").addClass(`orderregel${elementcounter}`).appendTo("#orderregel-container");
 		elementcounter++;
+	}
+	
+	function removeRow() {
+		const el = document.getElementById("orderregel-container");
+		el.removeChild(el.lastChild);
 	}
 
 	function calcTotal() {
